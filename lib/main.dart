@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Task Management',
       debugShowCheckedModeBanner: false,
-      initialRoute: "/setPassword",
+      initialRoute: "/pinVerification",
       routes: {
         "/" : (context) => const SplashScreen(),
         "/login" : (context) => const LoginScreen(),
