@@ -34,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
       bool response = await loginRequest(formValues);
 
       if (response == true) {
+        Navigator.pushNamedAndRemoveUntil(context, "/newTaskList", (route) => false);
       } else {
         setState(() {
           isLoading = false;
@@ -49,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           screenBackground(context),
           Container(
+            alignment: Alignment.center,
             child: isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : SingleChildScrollView(
