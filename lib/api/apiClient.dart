@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:task_manager/style/style.dart';
+import 'package:task_manager/utility/utility.dart';
 
 var baseUrl = "https://task.teamrabbil.com/api/v1";
 var requestHeader = {"Content-Type":"application/json"};
@@ -18,6 +19,7 @@ Future<bool> loginRequest(formValues) async{
 
   if(resultCode == 200 && resultBody["status"] == "success"){
     successToast("login successfully");
+    await writeUserData(resultBody);
     return true;
   }else{
     errorToast("login failed! try again");
