@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/api/apiClient.dart';
 
 import '../../style/style.dart';
 
@@ -10,6 +11,37 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  Map<String, String> formValues = {"email": "", "password": ""};
+  bool isLoading = false;
+
+  inputOnChange(mapKey, textValue) {
+    if (mounted) {
+      setState(() {
+        formValues.update(mapKey, (value) => textValue);
+      });
+    }
+  }
+
+  formOnSubmit() async {
+    if (formValues["email"]!.trim().isEmpty) {
+      errorToast("Email Required");
+    } else if (formValues["password"]!.trim().isEmpty) {
+      errorToast("Password Required");
+    } else {
+      setState(() {
+        isLoading = true;
+      });
+      bool response = await loginRequest(formValues);
+
+      if (response == true) {
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,38 +49,50 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           screenBackground(context),
           Container(
-            padding: const EdgeInsets.all(30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Get Started With",
-                  style: head1Text(colorDarkBlue),
-                ),
-                const SizedBox(height: 1),
-                Text(
-                  "Learn with Rabbil Hasan",
-                  style: head6Text(colorLightGray),
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  decoration: appInputDecoration("Email Address"),
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  decoration: appInputDecoration("Password"),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: appButtonStyle(),
-                    child: successButtonChild("Login"),
+            child: isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : SingleChildScrollView(
+                    padding: const EdgeInsets.all(30),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Get Started With",
+                          style: head1Text(colorDarkBlue),
+                        ),
+                        const SizedBox(height: 1),
+                        Text(
+                          "Learn with Rabbil Hasan",
+                          style: head6Text(colorLightGray),
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          onChanged: (textValue) {
+                            inputOnChange("email", textValue);
+                          },
+                          decoration: appInputDecoration("Email Address"),
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          onChanged: (textValue) {
+                            inputOnChange("password", textValue);
+                          },
+                          decoration: appInputDecoration("Password"),
+                        ),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              formOnSubmit();
+                            },
+                            style: appButtonStyle(),
+                            child: successButtonChild("Login"),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
           ),
         ],
       ),
