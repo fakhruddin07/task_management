@@ -34,7 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
       bool response = await loginRequest(formValues);
 
       if (response == true) {
-        Navigator.pushNamedAndRemoveUntil(context, "/newTaskList", (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, "/newTaskList", (route) => false);
       } else {
         setState(() {
           isLoading = false;
@@ -92,6 +93,39 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: successButtonChild("Login"),
                           ),
                         ),
+                        const SizedBox(height: 40),
+                        Container(
+                          alignment: Alignment.center,
+                          child: Column(
+                            children: [
+                              InkWell(
+                                 onTap: (){
+                                   Navigator.pushNamed(context, "/emailVerification");
+                                 },
+                                child: Text(
+                                  "Forget Password?",
+                                  style: head7Text(colorLightGray),
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Don't have account? ", style: head7Text(colorDarkBlue),),
+                                  InkWell(
+                                    onTap: (){
+                                      Navigator.pushNamed(context, "/registration");
+                                    },
+                                    child: Text(
+                                      "Sign in",
+                                      style: head7Text(colorGreen),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),

@@ -47,6 +47,15 @@ TextStyle head6Text(textColor) {
   );
 }
 
+TextStyle head7Text(textColor) {
+  return TextStyle(
+    color: textColor,
+    fontSize: 13,
+    fontFamily: "Poppins",
+    fontWeight: FontWeight.w400,
+  );
+}
+
 InputDecoration appInputDecoration(label) {
   return InputDecoration(
     fillColor: colorWhite,
