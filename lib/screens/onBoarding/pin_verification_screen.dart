@@ -25,7 +25,7 @@ class _PinVerificationScreen extends State<PinVerificationScreen> {
   }
 
   formOnSubmit() async {
-    if (formValues["otp"]!.trim().isEmpty) {
+    if (formValues["otp"]!.length != 6) {
       errorToast("OTP Required");
     } else {
       if (mounted) {
@@ -56,9 +56,7 @@ class _PinVerificationScreen extends State<PinVerificationScreen> {
           Container(
             alignment: Alignment.center,
             child: isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
+                ? const Center(child: CircularProgressIndicator())
                 : SingleChildScrollView(
                     padding: const EdgeInsets.all(30),
                     child: Column(
