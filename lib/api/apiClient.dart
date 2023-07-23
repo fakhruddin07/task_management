@@ -88,22 +88,17 @@ Future<bool> otpVerifyRequest(email, otp) async{
 Future<bool> setPasswordRequest(formValue) async{
   var url = Uri.parse("$baseUrl/RecoverResetPass");
   var postBody = jsonEncode(formValue);
-  print(postBody);
 
   var response = await http.post(url, headers: requestHeader, body: postBody);
-  print(response);
 
   var resultCode = response.statusCode;
   var resultBody = jsonDecode(response.body);
-  print(resultBody);
 
   if(resultCode == 200 && resultBody["status"] == "success"){
     successToast("Request Success");
-    print(resultBody["status"]);
     return true;
   }else{
     errorToast("Request fail! try again");
-    print(resultBody["status"]);
     return false;
   }
 }

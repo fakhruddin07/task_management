@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/task/home_screen.dart';
 
 import 'screens/onBoarding/email_verification_screen.dart';
 import 'screens/onBoarding/login_Screen.dart';
@@ -6,7 +7,7 @@ import 'screens/onBoarding/pin_Verification_Screen.dart';
 import 'screens/onBoarding/registration_Screen.dart';
 import 'screens/onBoarding/set_password_screen.dart';
 import 'screens/onBoarding/splash_Screen.dart';
-import 'screens/task/new_Task_List_Screen.dart';
+import 'screens/task/home_screen.dart';
 import 'utility/utility.dart';
 
 void main() async{
@@ -15,7 +16,7 @@ void main() async{
   if(token == null) {
     runApp(const MyApp("/login"));
   }else{
-    runApp(const MyApp("/newTaskList"));
+    runApp(const MyApp("/"));
   }
 }
 
@@ -30,13 +31,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: "/login",
       routes: {
-        "/" : (context) => const SplashScreen(),
+        /*"/" : (context) => const SplashScreen(),*/
+        "/" : (context) => const HomeScreen(),
         "/login" : (context) =>  const LoginScreen(),
         "/registration" : (context) => const RegistrationScreen(),
         "/emailVerification" : (context) => const EmailVerificationScreen(),
         "/pinVerification" : (context) => const PinVerificationScreen(),
         "/setPassword" : (context) => const SetPasswordScreen(),
-        "/newTaskList" : (context) => const NewTaskListScreen(),
       },
     );
   }
