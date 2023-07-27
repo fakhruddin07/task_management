@@ -31,10 +31,15 @@ class _CancelledTaskListState extends State<CancelledTaskList> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Cancelled Screen"),
-      ),
-    );
+    return isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : RefreshIndicator(
+            onRefresh: () async {
+              await callData();
+            },
+            child: const Center(
+              child: Text("Cancelled"),
+            ),
+          );
   }
 }

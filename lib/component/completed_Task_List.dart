@@ -31,10 +31,15 @@ class _CompletedTaskListState extends State<CompletedTaskList> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Completed Screen"),
-      ),
-    );
+    return isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : RefreshIndicator(
+            onRefresh: () async {
+              await callData();
+            },
+            child: const Center(
+              child: Text("Completed"),
+            ),
+          );
   }
 }

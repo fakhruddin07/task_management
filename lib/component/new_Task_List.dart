@@ -30,6 +30,15 @@ class _NewTaskListState extends State<NewTaskList> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading ? const Center(child: CircularProgressIndicator()) : const Center(child: Text("New"));
+    return isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : RefreshIndicator(
+            onRefresh: () async {
+              await callData();
+            },
+            child: const Center(
+              child: Text("New"),
+            ),
+          );
   }
 }

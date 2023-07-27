@@ -31,10 +31,15 @@ class _ProgressTaskList extends State<ProgressTaskList> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Progress Screen"),
-      ),
-    );
+    return isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : RefreshIndicator(
+            onRefresh: () async {
+              await callData();
+            },
+            child: const Center(
+              child: Text("Progress"),
+            ),
+          );
   }
 }
