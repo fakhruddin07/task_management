@@ -30,10 +30,6 @@ class _NewTaskListState extends State<NewTaskList> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("New Task List Screen"),
-      ),
-    );
+    return isLoading ? const Center(child: CircularProgressIndicator()) : const Center(child: Text("New"));
   }
 }
