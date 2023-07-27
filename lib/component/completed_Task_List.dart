@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../api/apiClient.dart';
+
 class CompletedTaskList extends StatefulWidget {
   const CompletedTaskList({super.key});
 
@@ -8,6 +10,25 @@ class CompletedTaskList extends StatefulWidget {
 }
 
 class _CompletedTaskListState extends State<CompletedTaskList> {
+  List taskItems = [];
+  bool isLoading = true;
+
+  @override
+  initState() {
+    callData();
+    super.initState();
+  }
+
+  callData() async {
+    var data = await taskListRequest("Completed");
+    if (mounted) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+    taskItems = data;
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

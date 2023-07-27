@@ -104,7 +104,7 @@ Future<bool> setPasswordRequest(formValue) async{
 }
 
 /*List Task by Status*/
-Future<List> listTaskStatus(status) async{
+Future<List> taskListRequest(status) async{
   var url = Uri.parse("$baseUrl/listTaskByStatus/$status");
   String? token = await readUserData("token");
   var requestHeaderWithToken = {"Content-Type":"application/json", "token":"$token"};
