@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../component/app_bottom_nav.dart';
-import '../../component/cancel_Task_List.dart';
-import '../../component/completed_Task_List.dart';
-import '../../component/new_Task_List.dart';
-import '../../component/progress_Task_List.dart';
+import '../../component/cancel_task_list.dart';
+import '../../component/completed_task_list.dart';
+import '../../component/new_task_list.dart';
+import '../../component/progress_task_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

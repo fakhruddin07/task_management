@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../api/apiClient.dart';
 
-class NewTaskList extends StatefulWidget {
-  const NewTaskList({super.key});
+import '../api/apiClient.dart';
+import '../component/task_list.dart';
+
+class ProgressTaskList extends StatefulWidget {
+  const ProgressTaskList({super.key});
 
   @override
-  State<NewTaskList> createState() => _NewTaskListState();
+  State<ProgressTaskList> createState() => _ProgressTaskList();
 }
 
-class _NewTaskListState extends State<NewTaskList> {
+class _ProgressTaskList extends State<ProgressTaskList> {
   List taskItems = [];
   bool isLoading = true;
 
@@ -19,7 +21,7 @@ class _NewTaskListState extends State<NewTaskList> {
   }
 
   callData() async {
-    var data = await taskListRequest("New");
+    var data = await taskListRequest("Progress");
     if (mounted) {
       setState(() {
         isLoading = false;
@@ -36,9 +38,7 @@ class _NewTaskListState extends State<NewTaskList> {
             onRefresh: () async {
               await callData();
             },
-            child: const Center(
-              child: Text("New"),
-            ),
+            child: taskList(taskItems),
           );
   }
 }

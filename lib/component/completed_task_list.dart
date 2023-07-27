@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../api/apiClient.dart';
+import '../component/task_list.dart';
 
-class CancelledTaskList extends StatefulWidget {
-  const CancelledTaskList({super.key});
+class CompletedTaskList extends StatefulWidget {
+  const CompletedTaskList({super.key});
 
   @override
-  State<CancelledTaskList> createState() => _CancelledTaskListState();
+  State<CompletedTaskList> createState() => _CompletedTaskListState();
 }
 
-class _CancelledTaskListState extends State<CancelledTaskList> {
+class _CompletedTaskListState extends State<CompletedTaskList> {
   List taskItems = [];
   bool isLoading = true;
 
@@ -20,7 +21,7 @@ class _CancelledTaskListState extends State<CancelledTaskList> {
   }
 
   callData() async {
-    var data = await taskListRequest("Cancelled");
+    var data = await taskListRequest("Completed");
     if (mounted) {
       setState(() {
         isLoading = false;
@@ -37,9 +38,7 @@ class _CancelledTaskListState extends State<CancelledTaskList> {
             onRefresh: () async {
               await callData();
             },
-            child: const Center(
-              child: Text("Cancelled"),
-            ),
+            child: taskList(taskItems),
           );
   }
 }
