@@ -10,6 +10,10 @@ class CompletedTaskList extends StatefulWidget {
 class _CompletedTaskListState extends State<CompletedTaskList> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      body: Center(
+        child: Text("Completed Screen"),
+      ),
+    );
   }
 }
