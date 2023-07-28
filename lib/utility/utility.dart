@@ -30,6 +30,12 @@ Future<String?> readUserData(userKey) async {
   return user;
 }
 
+Future<bool> removeToken() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.remove("token");
+  return true;
+}
+
 showBase64Image(base64String){
   UriData? data = Uri.parse(base64String).data;
   Uint8List myImage = data!.contentAsBytes();
