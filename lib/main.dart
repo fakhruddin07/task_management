@@ -6,6 +6,7 @@ import 'screens/onBoarding/login_Screen.dart';
 import 'screens/onBoarding/pin_Verification_Screen.dart';
 import 'screens/onBoarding/registration_Screen.dart';
 import 'screens/onBoarding/set_password_screen.dart';
+import 'screens/task/task_Create_Screen.dart';
 import 'utility/utility.dart';
 
 void main() async{
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         "/emailVerification" : (context) => const EmailVerificationScreen(),
         "/pinVerification" : (context) => const PinVerificationScreen(),
         "/setPassword" : (context) => const SetPasswordScreen(),
+        "/taskCreate" : (context) => const TaskCreateScreen(),
       },
     );
   }

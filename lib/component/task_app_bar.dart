@@ -40,7 +40,9 @@ AppBar taskAppBar(context, Map<String, String> profileData) {
     ),
     actions: [
       IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, "/taskCreate");
+        },
         icon: const Icon(Icons.add_circle_outline),
       ),
       IconButton(
