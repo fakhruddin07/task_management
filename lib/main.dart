@@ -6,8 +6,6 @@ import 'screens/onBoarding/login_Screen.dart';
 import 'screens/onBoarding/pin_Verification_Screen.dart';
 import 'screens/onBoarding/registration_Screen.dart';
 import 'screens/onBoarding/set_password_screen.dart';
-import 'screens/onBoarding/splash_Screen.dart';
-import 'screens/task/home_screen.dart';
 import 'utility/utility.dart';
 
 void main() async{
