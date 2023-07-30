@@ -122,3 +122,24 @@ Future<List> taskListRequest(status) async{
     return [];
   }
 }
+
+/*Create New Task with fixed Status*/
+Future<bool> taskCreateRequest(formValue) async{
+  var url = Uri.parse("$baseUrl/createTask");
+  String? token = await readUserData("token");
+  var requestHeaderWithToken = {"Content-Type":"application/json", "token":"$token"};
+  var postBody = jsonEncode(formValue);
+
+  var response = await http.post(url, headers: requestHeaderWithToken, body: postBody);
+
+  var resultCode = response.statusCode;
+  var resultBody= jsonDecode(response.body);
+
+  if(resultCode == 200 && resultBody["status"] == "success"){
+    successToast("Request Success");
+    return true;
+  }else{
+    errorToast("Request fail! try again");
+    return false;
+  }
+}

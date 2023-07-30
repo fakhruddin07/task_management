@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/api/apiClient.dart';
 import 'package:task_manager/style/style.dart';
 
 class TaskCreateScreen extends StatefulWidget {
@@ -33,7 +34,7 @@ class _TaskCreateScreenState extends State<TaskCreateScreen> {
       setState(() {
         isLoading = true;
       });
-      bool response = true;
+      bool response = await taskCreateRequest(formValues);
 
       if (response == true) {
         Navigator.pushNamedAndRemoveUntil(
