@@ -13,7 +13,7 @@ const colorDarkBlue = Color.fromRGBO(44, 62, 80, 1.0);
 const colorLightGray = Color.fromRGBO(135, 142, 150, 1.0);
 const colorLight = Color.fromRGBO(211, 211, 211, 1.0);
 
-SizedBox itemSizedBox(child){
+SizedBox itemSizedBox(child) {
   return SizedBox(
     width: double.infinity,
     child: Container(
@@ -23,20 +23,19 @@ SizedBox itemSizedBox(child){
   );
 }
 
-PinTheme appOtpStyle(){
+PinTheme appOtpStyle() {
   return PinTheme(
-    inactiveColor: colorLight,
-    inactiveFillColor: colorWhite,
-    selectedColor: colorGreen,
-    selectedFillColor: colorGreen,
-    activeColor: colorWhite,
-    activeFillColor: colorWhite,
-    shape: PinCodeFieldShape.box,
-    borderRadius: BorderRadius.circular(5),
-    fieldHeight: 50,
-    fieldWidth: 50,
-    borderWidth: 0.5
-  );
+      inactiveColor: colorLight,
+      inactiveFillColor: colorWhite,
+      selectedColor: colorGreen,
+      selectedFillColor: colorGreen,
+      activeColor: colorWhite,
+      activeFillColor: colorWhite,
+      shape: PinCodeFieldShape.box,
+      borderRadius: BorderRadius.circular(5),
+      fieldHeight: 50,
+      fieldWidth: 50,
+      borderWidth: 0.5);
 }
 
 TextStyle head1Text(textColor) {
@@ -139,6 +138,14 @@ ButtonStyle appButtonStyle() {
   );
 }
 
+ButtonStyle appStatusButtonStyle(btnColor) {
+  return ElevatedButton.styleFrom(
+    elevation: 1,
+    padding: EdgeInsets.zero,
+    backgroundColor: btnColor,
+  );
+}
+
 TextStyle buttonTextStyle() {
   return const TextStyle(
     fontSize: 14,
@@ -159,6 +166,26 @@ Ink successButtonChild(buttonText) {
       child: Text(
         buttonText,
         style: buttonTextStyle(),
+      ),
+    ),
+  );
+}
+
+Container statusChild(statusText, statusColor) {
+  return Container(
+    alignment: Alignment.center,
+    height: 20,
+    width: 60,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      color: statusColor,
+    ),
+    child: Text(
+      statusText,
+      style: const TextStyle(
+        color: colorWhite,
+        fontWeight: FontWeight.w400,
+        fontSize: 10,
       ),
     ),
   );
