@@ -29,6 +29,38 @@ class _NewTaskListState extends State<NewTaskList> {
     taskItems = data;
   }
 
+  deleteItem(id) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("DELETE"),
+          content: const Text("Once you delete it, you can't get it back"),
+          actions: [
+            OutlinedButton(
+              onPressed: () async {
+                print("YES");
+                Navigator.pop(context);
+                setState(() {
+                  isLoading = true;
+                });
+                await taskDeleteRequest(id);
+                await callData();
+              },
+              child: const Text("Yes"),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("No"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return isLoading
@@ -37,7 +69,7 @@ class _NewTaskListState extends State<NewTaskList> {
             onRefresh: () async {
               await callData();
             },
-            child: taskList(taskItems),
+            child: taskList(taskItems, deleteItem),
           );
   }
 }

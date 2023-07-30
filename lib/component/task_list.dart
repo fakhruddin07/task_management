@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/style/style.dart';
 
-ListView taskList(taskItems) {
+ListView taskList(taskItems, deleteItem) {
   return ListView.builder(
     itemCount: taskItems.length,
     itemBuilder: (context, index) {
@@ -56,7 +56,10 @@ ListView taskList(taskItems) {
                           height: 30,
                           width: 50,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              print("YES");
+                              deleteItem(taskItems[index]["_id"]);
+                            },
                             style: appStatusButtonStyle(colorRed),
                             child: const Icon(
                               Icons.delete,
