@@ -39,7 +39,6 @@ class _NewTaskListState extends State<NewTaskList> {
           actions: [
             OutlinedButton(
               onPressed: () async {
-                print("YES");
                 Navigator.pop(context);
                 setState(() {
                   isLoading = true;
@@ -60,6 +59,18 @@ class _NewTaskListState extends State<NewTaskList> {
       },
     );
   }
+  
+  statusChange(id){
+    showModalBottomSheet(context: context, builder: (context) {
+      return StatefulBuilder(builder: (context, setState) {
+        return Container(
+          height: 300,
+          padding: const EdgeInsets.all(30),
+          child: Column(children: [],),
+        );
+      },);
+    },);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +80,7 @@ class _NewTaskListState extends State<NewTaskList> {
             onRefresh: () async {
               await callData();
             },
-            child: taskList(taskItems, deleteItem),
+            child: taskList(taskItems, deleteItem, statusChange),
           );
   }
 }
