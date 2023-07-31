@@ -163,3 +163,23 @@ Future<bool> taskDeleteRequest(id) async{
     return false;
   }
 }
+
+/*Task Updated by ID & Status*/
+Future<bool> taskUpdatedRequest(id, status) async{
+  var url = Uri.parse("$baseUrl/updateTaskStatus/$id/$status");
+  String? token = await readUserData("token");
+  var requestHeaderWithToken = {"Content-Type":"application/json", "token":"$token"};
+
+  var response = await http.get(url, headers: requestHeaderWithToken);
+
+  var resultCode = response.statusCode;
+  var resultBody= jsonDecode(response.body);
+
+  if(resultCode == 200 && resultBody["status"] == "success"){
+    successToast("Request Success");
+    return true;
+  }else{
+    errorToast("Request fail! try again");
+    return false;
+  }
+}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../api/apiClient.dart';
 import '../component/task_list.dart';
+import '../style/style.dart';
 
 class ProgressTaskList extends StatefulWidget {
   const ProgressTaskList({super.key});
@@ -13,6 +14,7 @@ class ProgressTaskList extends StatefulWidget {
 class _ProgressTaskList extends State<ProgressTaskList> {
   List taskItems = [];
   bool isLoading = true;
+  String status = "Progress";
 
   @override
   initState() {
@@ -52,16 +54,80 @@ class _ProgressTaskList extends State<ProgressTaskList> {
     },);
   }
 
-  statusChange(id){
-    showModalBottomSheet(context: context, builder: (context) {
-      return StatefulBuilder(builder: (context, setState) {
-        return Container(
-          height: 300,
-          padding: const EdgeInsets.all(30),
-          child: Column(children: [],),
+  statusChange(id) async{
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Container(
+              height: 360,
+              padding: const EdgeInsets.all(30),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  RadioListTile(
+                    title: const Text("New"),
+                    value: "New",
+                    groupValue: status,
+                    onChanged: (value) {
+                      status = value.toString();
+                      setState(() {});
+                    },
+                  ),
+                  RadioListTile(
+                    title: const Text("Progress"),
+                    value: "Progress",
+                    groupValue: status,
+                    onChanged: (value) {
+                      status = value.toString();
+                      setState(() {});
+                    },
+                  ),
+                  RadioListTile(
+                    title: const Text("Completed"),
+                    value: "Completed",
+                    groupValue: status,
+                    onChanged: (value) {
+                      status = value.toString();
+                      setState(() {});
+                    },
+                  ),
+                  RadioListTile(
+                    title: const Text("Cancelled"),
+                    value: "Cancelled",
+                    groupValue: status,
+                    onChanged: (value) {
+                      status = value.toString();
+                      setState(() {});
+                    },
+                  ),
+                  SizedBox(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        updateStatus(id);
+                      },
+                      style: appButtonStyle(),
+                      child: successButtonChild("Confirm"),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         );
-      },);
-    },);
+      },
+    );
+  }
+
+  updateStatus(id) async{
+    setState((){isLoading = true;});
+    await taskUpdatedRequest(id,status);
+    await callData();
+    setState((){
+      status = "Progress";
+    });
   }
 
   @override
